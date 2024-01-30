@@ -1,95 +1,68 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+'use client'
+import comments from './comments.json'
+import styles from './page.module.scss'
+import {useEffect, useState} from "react";
+import {Comment} from "@/app/_components/Comment";
+import {CommentArea} from "@/app/_components/CommentArea";
 
 export default function Home() {
+  const [commentsRender, setCommentsRender] = useState(comments);
+
+  useEffect(() => {
+    console.log("HOLAAA")
+  }, [commentsRender])
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div className={styles.main}>
+      <div className='container'>
+        <h1>Incorrect &quot;unexpected token&quot; error when using variable interpolation</h1>
+
+        <div className='container__data'>
+          <h4 className="attribute__name">Status</h4>
+          <span className="attribute__value">Work in progress</span>
+          <h4 className="attribute__name">Priority</h4>
+          <span className="attribute__value">High</span>
+          <h4 className="attribute__name">Status</h4>
+          <span className="attribute__value">High</span>
+          <h4 className="attribute__name">Assignee</h4>
+          <span className="attribute__value">Kaisha Cleveland</span>
         </div>
-      </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+        <h4>
+          Description
+        </h4>
+        <p className="task__description">
+          Attempt to use variable interpolation to define operation in function() expression results in &quot;unexpected token&quot; error while compiler produces correct result.
+        </p>
+
+        <h4>
+          Comments
+        </h4>
+
+        <CommentArea
+          submit={(text) => {
+            console.log('Text')
+            let value = commentsRender
+            value.unshift({
+              id: commentsRender.length + 1,
+              name: 'You',
+              text: text
+            })
+            const finalValue= [...value]
+            setCommentsRender(finalValue)
+          }}
         />
+
+        {
+          commentsRender.map((comment) => {
+            return <Comment
+                key={comment.id}
+                name={comment.name}
+                text={comment.text}
+            />
+          })
+        }
       </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </div>
   )
 }

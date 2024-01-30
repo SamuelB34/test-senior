@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Belinda Walsh",
+    "text": "Hi! Any solution for that? Any idea when this will be fixed?"
+  },
+  {
+    "id": 2,
+    "name": "Eugene Keenan",
+    "text": "Sent you the compilation log and system version in Slack."
+  },
+  {
+    "id": 3,
+    "name": "You",
+    "text": "We will look into details of the issue after the holidays!"
+  },
+  {
+    "id": 4,
+    "name": "Eugene Keenan",
+    "text": "I ran into a similar problem - when using variable as function() argument."
+  }
+]
